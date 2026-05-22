@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptVault | AI Prompt Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'JetBrains Mono', monospace; }</style>
+</head>
+<body class="bg-[#0e1117] text-slate-300 antialiased p-6">
+
+    <div class="max-w-2xl mx-auto mt-12 bg-[#161b22] border border-slate-800 rounded-2xl p-6 shadow-2xl">
+        <div class="flex items-center space-x-3 border-b border-slate-800 pb-4 mb-6">
+            <span class="text-xl">📁</span>
+            <h1 class="text-lg font-bold text-white tracking-tight">PromptVault Live Engine</h1>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs uppercase tracking-wider text-slate-500 font-semibold mb-2">Input AI Prompt Text</label>
+                <textarea id="promptInput" rows="3" class="w-full bg-[#0e1117] border border-slate-800 rounded-xl p-4 text-xs text-white focus:outline-none focus:border-purple-500 transition resize-none" placeholder="Act as a senior software engineer..."></textarea>
+            </div>
+            
+            <button onclick="savePrompt()" class="w-full bg-purple-600 hover:bg-purple-700 h-11 rounded-xl text-white font-semibold text-xs transition">
+                + Save Custom Prompt Template
+            </button>
+        </div>
+
+        <div class="mt-8">
+            <h3 class="text-xs uppercase tracking-wider text-slate-500 font-semibold mb-3">Saved Repositories</h3>
+            <div id="vaultList" class="space-y-2">
+                <div class="p-3 bg-[#0e1117] border border-slate-800/80 rounded-xl text-xs flex justify-between items-center text-slate-400">
+                    <span>"Act as a professional UI designer..."</span>
+                    <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">Default</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function savePrompt() {
+            const val = document.getElementById('promptInput').value.trim();
+            if(!val) return alert("Write something to save inside the vault engine!");
+            
+            const list = document.getElementById('vaultList');
+            const item = document.createElement('div');
+            item.className = "p-3 bg-[#0e1117] border border-purple-900/30 rounded-xl text-xs flex justify-between items-center text-white animation-pulse";
+            item.innerHTML = `<span>"${val.substring(0,40)}..."</span><span class="text-[10px] bg-purple-500/10 border border-purple-500/20 px-2 py-0.5 rounded text-purple-400">Active</span>`;
+            
+            list.prepend(item);
+            document.getElementById('promptInput').value = '';
+        }
+    </script>
+
+</body>
+</html>
